@@ -58,16 +58,6 @@ export default {
     },
   },
   methods: {
-    // // addSome(x) {
-    // //   for (; x; x--) {
-    // //     var newRandom = Math.floor(Math.random() * 11 - 5);
-    // //     this.randomses.push(newRandom)
-
-    // //     var newPoint = this.countSum(this.randomses)
-    // //     this.randomsesSums.push(newPoint)
-    // //   }
-    // //   this.calcPath
-    // // },
     startInterval() {
       window.setInterval(() => {
         if (!this.stopped) {
