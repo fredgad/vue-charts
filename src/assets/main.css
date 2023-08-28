@@ -1,0 +1,39 @@
+@import './base.css';
+
+#app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: normal;
+  width: 100%;
+  position: relative;
+  top: 0;
+  min-height: 100vh;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: grey;
+  /* color: hsla(160, 100%, 37%, 1); */
+  transition: 0.4s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(302, 58%, 23%, 0.2);
+  }
+}
+
+/* @media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+
+  #app {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 2rem;
+  }
+} */
