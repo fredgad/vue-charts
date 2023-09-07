@@ -11,7 +11,7 @@ import Header from "./components/layout/Header.vue";
         <RouterLink to="/game">Game</RouterLink>
         <RouterLink to="/brain">Brain</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/photo">Photo</RouterLink>
+        <!-- <RouterLink to="/photo">Photo</RouterLink> -->
       </nav>
     </div>
   </header>

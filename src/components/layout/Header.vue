@@ -9,7 +9,7 @@
       <router-link to="/scrollbarplugin"
         >Кастомная полоса прокрутки</router-link
       >
-      <router-link to="/photo">Фоторез</router-link>
+      <!-- <router-link to="/photo">Фоторез</router-link> -->
     </div>
   </header>
 </template>

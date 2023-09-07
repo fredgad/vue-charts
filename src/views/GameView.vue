@@ -31,50 +31,77 @@ export default {
   },
   methods: {
     firstStart() {
-      // Первый запуск
       this.firstStartCheck = false;
       this.startGame();
       this.timerStart();
     },
     startGame() {
-      // Запуск игры
-      this.win = false; // Обнуление стейта
-      (this.array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]),
+      this.win = false;
+      (this.array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]),
         (this.steps = 0);
       this.timer = 0;
       this.timerCheck = true;
 
-      this.changeArray();
+      this.generateSolvableState();
+    },
+    generateSolvableState() {
+      this.shuffleArray();
+
+      // Check if the permutation is even; if not, swap two elements
+      if (!this.isEvenPermutation(this.array)) {
+        // Find two elements to swap such that it becomes an even permutation
+        for (let i = 0; i < this.array.length - 1; i++) {
+          for (let j = i + 1; j < this.array.length; j++) {
+            if (this.array[i] > this.array[j]) {
+              // Swap the elements
+              [this.array[i], this.array[j]] = [this.array[j], this.array[i]];
+              break;
+            }
+          }
+          if (this.isEvenPermutation(this.array)) {
+            break;
+          }
+        }
+      }
+
+      // Add the empty space (15) to the last position
+      this.array.push(15);
+      console.log(this.array);
+    },
+    isEvenPermutation(numbers) {
+      let inversions = 0;
+      for (let i = 0; i < numbers.length - 1; i++) {
+        for (let j = i + 1; j < numbers.length; j++) {
+          if (numbers[i] > numbers[j]) {
+            inversions++;
+          }
+        }
+      }
+      return inversions % 2 === 0;
+    },
+    shuffleArray() {
+      for (let i = this.array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [this.array[i], this.array[j]] = [this.array[j], this.array[i]];
+      }
     },
     makeStep() {
-      // При нажатии на игровую клетку
       let target = event.target.getAttribute("data-key"),
         targetPos = this.array.indexOf(+target),
         invisPos = this.array.indexOf(this.invis);
 
       if (
         targetPos === invisPos + 1 ||
-        targetPos === invisPos - 1 || // Горизонтальная проверка
+        targetPos === invisPos - 1 || // Gorizontal check
         targetPos === invisPos + 4 ||
         targetPos === invisPos - 4
       ) {
-        // Вертикальная проверка
+        // Vertical check
         let pos1 = this.array.splice(targetPos, 1, this.array[invisPos]);
         this.array[invisPos] = pos1[0];
         this.steps++;
         this.winCheck();
       }
-    },
-    changeArray() {
-      // Перемешать массив
-      const sliced = this.array.pop();
-      for (let x = 0; x < this.array.length; x++) {
-        let y = Math.trunc(Math.random() * this.array.length),
-          cont = this.array[x];
-        this.array[x] = this.array[y];
-        this.array[y] = cont;
-      }
-      this.array.push(15);
     },
     winCheck() {
       // Проверка на победу
